@@ -18,7 +18,7 @@ function buildMetadata(sample) {
     });
 
     // BONUS: Build the Gauge Chart
-    buildGauge(result.wfreq);
+  //   buildGauge(result.wfreq);
   });
 }
 
@@ -56,23 +56,19 @@ function buildCharts(sample) {
 
     Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 
-    var yticks = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
-    var barData = [
-      {
-        y: yticks,
-        x: sample_values.slice(0, 10).reverse(),
-        text: otu_labels.slice(0, 10).reverse(),
-        type: "bar",
-        orientation: "h",
-      }
-    ];
+    // Build pie chart
+    var pieValues = data.sample_values.slice(0,10);
+      var pielabels = data.otu_ids.slice(0, 10);
+      var pieText = data.otu_labels.slice(0, 10);
 
-    var barLayout = {
-      title: "Top 10 Bacteria Cultures Found",
-      margin: { t: 30, l: 150 }
-    };
+      var data = [{
+        values: pieValues,
+        labels: pielabels,
+        hovertext: pieText,
+        type: 'pie'
+      }];
 
-    Plotly.newPlot("bar", barData, barLayout);
+      Plotly.newPlot('pie', data);
   });
 }
 
