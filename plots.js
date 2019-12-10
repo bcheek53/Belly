@@ -57,20 +57,16 @@ function buildCharts(sample) {
     Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 
     // Build pie chart
-    var pieValues = data.sample_values.slice(0,10);
-      var pielabels = data.otu_ids.slice(0, 10);
-      var pieText = data.otu_labels.slice(0, 10);
+    var data = [{
+      values: sample_values.slice(0,10),
+      labels: otu_ids.slice(0, 10),
+      hovertext: otu_labels.slice(0, 10),
+      type: 'pie'
+    }];
 
-      var data = [{
-        values: pieValues,
-        labels: pielabels,
-        hovertext: pieText,
-        type: 'pie'
-      }];
-
-      Plotly.newPlot('pie', data);
-  });
-}
+    Plotly.newPlot('pie', data);
+});
+};
 
 function init() {
   // Grab a reference to the dropdown select element
